@@ -41,9 +41,6 @@ body{margin:0;background:var(--right);color:var(--ink-default);font-family:var(-
 .logo{display:flex;align-items:center;gap:10px;min-width:0}
 .logo svg{flex:none;width:30px;height:30px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 h1{margin:0;color:var(--ink-strong);font-size:19px;font-weight:600;line-height:1.25;letter-spacing:-.3px}
-.iconbtn{flex:none;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--field-line);border-radius:50%;background:var(--box);color:var(--ink-strong);cursor:pointer;transition:border-color .16s ease-out,color .16s ease-out}
-.iconbtn:hover{border-color:var(--accent-line);color:var(--accent)}
-.iconbtn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .boxhead{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:24px}
 .box{background:var(--box);border:1px solid var(--accent-line);border-radius:var(--radius-box);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
 .box h2,.dlg h2,.dlg h3{margin:0;color:var(--ink-strong);font-size:15px;font-weight:600;line-height:1.3}
@@ -107,9 +104,6 @@ canvas{display:block;width:100%;height:auto;background:#fff}
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7 14.5l3-3 2.5 2.5 2-2 2.5 2.5M8.5 8.2h.01"/></svg>
         <h1>출석왕 당첨자 발표 제작</h1>
       </div>
-      <button class="iconbtn" id="settingsBtn" type="button" aria-haspopup="dialog" aria-label="설정 열기" title="글자 크기 · 상단 이미지 설정">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.2 2h-.4a2 2 0 00-2 2v.2a2 2 0 01-1 1.7l-.4.3a2 2 0 01-2 0l-.2-.1a2 2 0 00-2.7.7l-.2.4a2 2 0 00.7 2.7l.2.1a2 2 0 011 1.7v.5a2 2 0 01-1 1.8l-.2.1a2 2 0 00-.7 2.7l.2.4a2 2 0 002.7.7l.2-.1a2 2 0 012 0l.4.3a2 2 0 011 1.7V20a2 2 0 002 2h.4a2 2 0 002-2v-.2a2 2 0 011-1.7l.4-.3a2 2 0 012 0l.2.1a2 2 0 002.7-.7l.2-.4a2 2 0 00-.7-2.7l-.2-.1a2 2 0 01-1-1.8v-.5a2 2 0 011-1.7l.2-.1a2 2 0 00.7-2.7l-.2-.4a2 2 0 00-2.7-.7l-.2.1a2 2 0 01-2 0l-.4-.3a2 2 0 01-1-1.7V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-      </button>
     </div>
 
     <section class="box" aria-labelledby="h-ev">
@@ -122,7 +116,7 @@ canvas{display:block;width:100%;height:auto;background:#fff}
     </section>
 
     <section class="box" aria-labelledby="h-xl">
-      <div class="boxhead"><h2 id="h-xl">당첨자 명단 엑셀 업로드</h2><div id="xlStatus"><span class="badge">예시 명단 표시 중</span></div></div>
+      <div class="boxhead"><h2 id="h-xl">당첨자 명단 엑셀 업로드</h2><div id="xlStatus"><span class="badge">명단 미첨부</span></div></div>
       <input id="xlFile" type="file" accept=".xlsx,.xls,.csv" aria-label="당첨자 엑셀 파일">
       <div id="xlWarn"></div>
     </section>
@@ -133,15 +127,15 @@ canvas{display:block;width:100%;height:auto;background:#fff}
         <div class="f"><label for="payMonth">월</label><input id="payMonth" type="number" value="11" min="1" max="12"></div>
         <div class="f"><label for="payDay">일</label><input id="payDay" type="number" value="8" min="1" max="31"></div>
         <div class="f"><label for="payWeek">요일</label><input id="payWeek" type="text" value="일" maxlength="1"></div>
-        <label class="chk"><input id="weekAuto" type="checkbox" checked> 자동</label>
+        <label class="chk"><input id="weekAuto" type="checkbox" checked> 요일 자동</label>
       </div>
       <p class="note"><b id="botPrev"></b></p>
     </section>
 
     <div class="actions">
       <div class="row">
-        <button class="btn" id="saveDir" type="button" disabled>이미지 저장</button>
-        <button class="btn ghost" id="saveZip" type="button" disabled>ZIP 파일 저장</button>
+        <button class="btn" id="saveZip" type="button" disabled>ZIP 파일 저장</button>
+        <button class="btn ghost" id="saveJson" type="button" disabled>JSON 파일 저장</button>
       </div>
       <p class="note" id="saveHint">엑셀 명단을 첨부하면 저장할 수 있습니다.</p>
       <p id="fnames" style="display:none"></p>
@@ -150,35 +144,6 @@ canvas{display:block;width:100%;height:auto;background:#fff}
   </div>
 
   <div class="right"><canvas id="cv" width="1280" height="3900" aria-label="완성 이미지 미리보기"></canvas></div>
-</div>
-
-<div class="overlay" id="settingsOv">
-  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
-    <div class="dlghead">
-      <div class="titlerow">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.2 2h-.4a2 2 0 00-2 2v.2a2 2 0 01-1 1.7l-.4.3a2 2 0 01-2 0l-.2-.1a2 2 0 00-2.7.7l-.2.4a2 2 0 00.7 2.7l.2.1a2 2 0 011 1.7v.5a2 2 0 01-1 1.8l-.2.1a2 2 0 00-.7 2.7l.2.4a2 2 0 002.7.7l.2-.1a2 2 0 012 0l.4.3a2 2 0 011 1.7V20a2 2 0 002 2h.4a2 2 0 002-2v-.2a2 2 0 011-1.7l.4-.3a2 2 0 012 0l.2.1a2 2 0 002.7-.7l.2-.4a2 2 0 00-.7-2.7l-.2-.1a2 2 0 01-1-1.8v-.5a2 2 0 011-1.7l.2-.1a2 2 0 00.7-2.7l-.2-.4a2 2 0 00-2.7-.7l-.2.1a2 2 0 01-2 0l-.4-.3a2 2 0 01-1-1.7V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-        <h2 id="dlgTitle">설정</h2>
-      </div>
-      <button class="iconbtn" id="settingsClose" type="button" aria-label="닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    </div>
-    <section>
-      <h3>글자 크기 조정</h3>
-      <div class="row wrap">
-        <div class="f" style="flex-basis:80px"><label for="s1">첫째 줄</label><input id="s1" type="number" value="45.5" step="0.1" min="10"></div>
-        <div class="f" style="flex-basis:80px"><label for="s2">둘째 줄</label><input id="s2" type="number" value="49.2" step="0.1" min="10"></div>
-        <div class="f" style="flex-basis:80px"><label for="s3">하단 문구</label><input id="s3" type="number" value="33.1" step="0.1" min="10"></div>
-        <div class="f" style="flex-basis:80px"><label for="s4">명단</label><input id="s4" type="number" value="16" step="0.1" min="8"></div>
-      </div>
-      <p class="note">상단 타이틀(첫째 줄, 둘째 줄), 하단 적립일, 당첨자 명단의 텍스트 크기 조정</p>
-    </section>
-    <section>
-      <h3>상단 이미지 업로드</h3>
-      <input id="topFile" type="file" accept="image/*" aria-label="상단 이미지 교체">
-      <div class="row"><button class="btn ghost" id="topReset" type="button" style="height:40px;padding:0 18px;font-size:13px">기본 이미지로 되돌리기</button></div>
-      <p class="note" id="topNote">1280×505 사이즈 준수</p>
-    </section>
-    <button class="btn" id="settingsOk" type="button">확인</button>
-  </div>
 </div>
 
 <script>
@@ -202,9 +167,9 @@ canvas{display:block;width:100%;height:auto;background:#fff}
     for(var i=0;i<500;i++){out.push({n:sn[r(10)]+'*'+gv[r(10)],id:ids[r(8)]+'****'+r(10)})}
     return out;
   }
-  people=sample();
+  people=[];
 
-  function num(id,def){var v=parseFloat($(id).value);return isFinite(v)?v:def}
+  function num(id,def){var el=$(id);var v=el?parseFloat(el.value):NaN;return isFinite(v)?v:def}
   function state(){
     var ev=Math.round(num('evMonth',10)), pm=Math.round(num('payMonth',11)), pd=Math.round(num('payDay',8)), yr=Math.round(num('year',2026));
     return {yr:yr,ev:ev,pm:pm,pd:pd,wk:$('payWeek').value.trim(),
@@ -309,6 +274,7 @@ canvas{display:block;width:100%;height:auto;background:#fff}
     $('fnames').textContent=n.folder+'/\n  '+n.full+'\n  images/'+n.parts.join(', ');
     $('fnames').style.whiteSpace='pre-wrap';
   }
+  function jsonName(){return names().full.replace(/\.jpg$/,'.json')}
 
   /* 엑셀 읽기 */
   function readExcel(file){
@@ -345,26 +311,13 @@ canvas{display:block;width:100%;height:auto;background:#fff}
     rd.readAsArrayBuffer(file);
   }
   function setSaveEnabled(){
-    $('saveDir').disabled=!hasExcel||!window.showDirectoryPicker;
     $('saveZip').disabled=!hasExcel;
-    $('saveHint').textContent=hasExcel?(window.showDirectoryPicker?'폴더 저장은 Chrome/Edge에서 지원됩니다. 막히면 ZIP으로 저장하세요.':'이 브라우저에서는 ZIP 저장을 사용하세요. 압축을 풀면 같은 폴더 구조입니다.'):'엑셀 명단을 첨부하면 저장할 수 있습니다.';
+    $('saveHint').textContent=hasExcel?'ZIP으로 저장하면 압축을 풀었을 때 폴더 구조가 유지됩니다. 수정용 JSON도 저장할 수 있습니다.':'엑셀 명단을 첨부하면 저장할 수 있습니다.';
+    $('saveJson').disabled=!hasExcel;
   }
 
-  /* 상단 이미지 교체 */
-  $('topFile').addEventListener('change',function(){
-    var f=this.files[0];if(!f)return;
-    var url=URL.createObjectURL(f);
-    loadImg(url).then(function(img){
-      topImg=img;
-      $('topNote').textContent=f.name+' ('+img.width+'×'+img.height+')'+((img.width!==W||img.height!==TOPH)?' · 1280×505에 맞춰 잘라 적용했습니다.':' · 적용됨');
-      render();
-    }).catch(function(){$('topNote').textContent='이미지를 열지 못했습니다.'});
-  });
-  $('topReset').addEventListener('click',function(){
-    topImg=defaultTop;$('topFile').value='';$('topNote').textContent='1280×505 사이즈 준수';render();
-  });
   $('xlFile').addEventListener('change',function(){if(this.files[0])readExcel(this.files[0])});
-  ['year','evMonth','payMonth','payDay','s1','s2','s3','s4'].forEach(function(id){$(id).addEventListener('input',render)});
+  ['year','evMonth','payMonth','payDay'].forEach(function(id){$(id).addEventListener('input',render)});
   $('payWeek').addEventListener('input',function(){$('weekAuto').checked=false;render()});
   $('weekAuto').addEventListener('change',render);
 
@@ -377,24 +330,6 @@ canvas{display:block;width:100%;height:auto;background:#fff}
     });
   }
   function msg(t,err){var m=$('saveMsg');m.hidden=false;m.className='msg'+(err?' err':'');m.textContent=t}
-
-  $('saveDir').addEventListener('click',function(){
-    var n=names();
-    window.showDirectoryPicker({id:'homerun-attendance',mode:'readwrite'}).then(function(root){
-      msg('이미지를 만드는 중입니다…');
-      return makeAll().then(function(b){
-        return root.getDirectoryHandle(n.folder,{create:true}).then(function(dir){
-          function put(d,name,blob){return d.getFileHandle(name,{create:true}).then(function(fh){return fh.createWritable()}).then(function(w){return w.write(blob).then(function(){return w.close()})})}
-          return put(dir,n.full,b[0]).then(function(){return dir.getDirectoryHandle('images',{create:true})}).then(function(im){
-            return put(im,n.parts[0],b[1]).then(function(){return put(im,n.parts[1],b[2])}).then(function(){return put(im,n.parts[2],b[3])});
-          });
-        });
-      }).then(function(){msg('저장했습니다. 선택한 위치의 “'+n.folder+'” 폴더를 확인하세요.')});
-    }).catch(function(e){
-      if(e&&e.name==='AbortError'){msg('저장을 취소했습니다.');return}
-      msg('이 화면에서는 폴더 저장이 막혀 있습니다. “ZIP 파일로 저장”을 사용하세요.\n('+(e&&e.name||'오류')+')',true);
-    });
-  });
 
   $('saveZip').addEventListener('click',function(){
     var n=names(); msg('이미지를 만드는 중입니다…');
@@ -419,22 +354,16 @@ canvas{display:block;width:100%;height:auto;background:#fff}
     }).catch(function(e){msg('저장하지 못했습니다. '+(e&&(e.message||e.code)||''),true)});
   });
 
-  var ov=$('settingsOv'), lastFocus=null;
-  function isOpen(){return ov.classList.contains('open')}
-  function openSettings(){lastFocus=document.activeElement;ov.classList.add('open');$('settingsClose').focus()}
-  function closeSettings(){ov.classList.remove('open');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
-  $('settingsBtn').addEventListener('click',openSettings);
-  $('settingsClose').addEventListener('click',closeSettings);
-  $('settingsOk').addEventListener('click',closeSettings);
-  ov.addEventListener('mousedown',function(e){if(e.target===ov)closeSettings()});
-  document.addEventListener('keydown',function(e){
-    if(!isOpen())return;
-    if(e.key==='Escape'){closeSettings();return}
-    if(e.key==='Tab'){
-      var els=ov.querySelectorAll('button,input'),a=els[0],z=els[els.length-1];
-      if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
-      else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
-    }
+  $('saveJson').addEventListener('click',function(){
+    var st=state(), t=texts();
+    var data={year:st.yr,eventMonth:st.ev,payMonth:st.pm,payDay:st.pd,payWeek:st.wk,
+      titleLine1:t.l1,titleLine2:t.l2,bottomText:t.l3,count:people.length,
+      winners:people.map(function(p){return {name:p.n,id:p.id}})};
+    var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=jsonName();
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
+    msg('JSON 파일을 내려받았습니다. ('+a.download+')');
   });
 
   setSaveEnabled();
