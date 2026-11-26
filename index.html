@@ -63,9 +63,6 @@ input[type=file]{display:none}
 
 .main{flex:1 1 0;min-height:0;display:grid;grid-template-columns:minmax(380px,1fr) minmax(0,2fr)}
 .left{background:var(--left);padding:20px 20px 24px 24px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;min-width:0;border-right:1px solid var(--field-line)}
-.lefttop{display:flex;justify-content:flex-end}
-.linkbtn{border:0;background:none;color:var(--ink-note);font-size:12px;display:inline-flex;align-items:center;gap:4px;padding:2px 4px}
-.linkbtn:hover{color:var(--accent)}
 
 .panel{background:var(--box);border:1px solid var(--accent-line);border-radius:var(--radius-box);padding:12px 14px;display:flex;flex-direction:column;gap:10px;min-width:0}
 .ph{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:28px}
@@ -112,42 +109,75 @@ canvas{display:block;height:auto;background:#fff;box-shadow:0 1px 8px rgba(30,32
 .zoom .zv{min-width:40px;text-align:center;font-size:12px;font-weight:700;color:var(--ink-default);cursor:default;user-select:none}
 
 
-/* 사용법 */
+/* 사용법 (홈키피키 동일 규격) */
 .overlay{display:none;position:fixed;inset:0;z-index:50;background:rgba(30,32,50,.38);align-items:center;justify-content:center;padding:16px}
 .overlay.open{display:flex}
-.hmodal{width:100%;max-width:600px;max-height:100%;overflow-y:auto;background:var(--box);border:1px solid var(--accent-line);border-radius:var(--radius-box);padding:20px;display:flex;flex-direction:column;gap:16px}
-.hhead{display:flex;align-items:center;justify-content:space-between}
-.hhead h2{margin:0;color:var(--ink-strong);font-size:19px;font-weight:600;letter-spacing:-.3px}
-.iconbtn{flex:none;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--field-line);border-radius:50%;background:var(--box);color:var(--ink-strong);cursor:pointer;transition:border-color .16s ease-out,color .16s ease-out}
+.hmodal{background:var(--box);border:1px solid var(--accent-line);border-radius:var(--radius-box);overflow:hidden;width:min(980px,100%);max-height:88vh;display:flex;flex-direction:column}
+.hmh{display:flex;align-items:center;padding:12px 20px;border-bottom:1px solid var(--field-line)}
+.hmh b{flex:1 1 0;color:var(--ink-strong);font-size:19px;font-weight:600;letter-spacing:-.3px}
+.iconbtn{flex:none;width:36px;height:36px;display:grid;place-items:center;padding:0;border:1px solid var(--field-line);border-radius:50%;background:var(--box);color:var(--ink-strong);cursor:pointer;transition:border-color .16s ease-out,color .16s ease-out}
 .iconbtn:hover{border-color:var(--accent-line);color:var(--accent)}
-.hsec{display:flex;flex-direction:column;gap:8px}
-.hsec h3{margin:0;padding-left:8px;border-left:3px solid var(--accent);color:var(--ink-strong);font-size:13px;font-weight:600;line-height:1.4}
-.hflow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.hflow div{background:var(--err-bg);border:1px solid var(--accent-line);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--ink-default);line-height:1.45}
-.hflow b{display:block;color:var(--err-ink);font-size:12px;margin-bottom:2px}
-.hl{display:flex;flex-direction:column;gap:5px;margin:0;padding:0;list-style:none;font-size:12px;color:var(--ink-default);line-height:1.5}
-.hl li{display:flex;gap:8px;align-items:flex-start}
-.hl b{color:var(--ink-strong);font-weight:600}
-.hn{flex:none;width:16px;height:16px;margin-top:1px;border-radius:50%;background:#2F6FEB;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;line-height:1}
-.hwarn{color:#C0392B;font-size:11px}
-.hcode{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;background:var(--field);border:1px solid var(--field-line);border-radius:4px;padding:0 4px}
-.hpre{margin:0;padding:10px 12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;line-height:1.5;background:var(--field);border:1px solid var(--field-line);border-radius:8px;color:var(--ink-default);white-space:pre-wrap}
-/* 화면 구성 도식 */
-.hmock{position:relative;border:1px solid var(--field-line);border-radius:10px;background:var(--field);padding:8px;font-size:9px;color:var(--ink-note)}
-.hmock .mtop{display:flex;align-items:center;gap:5px;background:var(--box);border:1px solid var(--field-line);border-radius:6px;padding:5px 7px}
-.hmock .mpill{border:1px solid var(--field-line);border-radius:99px;padding:1px 7px;background:var(--field);color:var(--ink-default);white-space:nowrap;position:relative}
-.hmock .mpill.p{background:var(--accent);border-color:transparent;color:#fff}
-.hmock .msp{flex:1}
-.hmock .mbody{display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:8px}
-.hmock .mleft{display:flex;flex-direction:column;gap:5px;position:relative}
-.hmock .mp{border:1px solid var(--accent-line);border-radius:6px;background:var(--box);padding:5px 7px;color:var(--ink-default);position:relative}
-.hmock .mright{position:relative;background:var(--box);border:1px solid var(--field-line);border-radius:6px;min-height:150px;padding:6px 8px}
-.hmock .mimg{margin-top:6px;height:110px;border-radius:4px;background:linear-gradient(#bfe3f8,#e9fbff)}
-.hmock .mzoom{position:absolute;top:6px;right:8px;width:20px;border:1px solid var(--field-line);border-radius:99px;background:var(--box);text-align:center;padding:3px 0;line-height:1.5;color:var(--ink-default)}
-.hmock .hn{position:absolute;top:-6px;right:-6px;width:14px;height:14px;font-size:9px;margin:0}
-.hmock .mall{text-align:right;color:var(--ink-note);position:relative;padding-right:8px}
-.hmock .mall .hn{top:-2px;right:-6px}
-@media (max-width:620px){.hflow{grid-template-columns:repeat(2,1fr)}}
+.hmb{overflow:auto;padding:6px 20px 24px;font-size:13.5px;line-height:1.7;color:var(--ink-default)}
+.hmb h3{display:block;margin:26px 0 10px;padding:3px 0 3px 10px;border-left:4px solid var(--accent);color:var(--ink-strong);font-size:15px;font-weight:600}
+.hmb ul{margin:0;padding-left:20px}
+.hmb li{margin:3px 0}
+.hmb p{margin:6px 0}
+.hmb .flow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.hmb .flow div{flex:1 1 0;min-width:150px;background:var(--err-bg);border:1px solid var(--accent-line);border-radius:12px;padding:10px 12px;font-size:12.5px;line-height:1.6}
+.hmb .flow div b{display:block;color:var(--accent);font-size:13px;margin-bottom:2px}
+.hmb .shot{display:block;width:100%;border:1px solid var(--field-line);border-radius:10px;margin:6px 0 10px;overflow:hidden}
+.hmb ol.lg{list-style:none;margin:0;padding:0}
+.hmb ol.lg li{display:flex;gap:8px;align-items:flex-start;margin:6px 0;font-size:13px;line-height:1.55}
+.hmb ol.lg i{flex:0 0 20px;height:20px;border-radius:50%;background:#1F6FEB;color:#fff;font-size:12px;font-weight:700;font-style:normal;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
+.hmb ol.lg b{color:var(--ink-strong);font-weight:600}
+.hmb .two{display:flex;gap:16px;align-items:flex-start}
+.hmb .two .shot{width:360px;flex:0 0 360px;margin:0}
+.hmb .two ol.lg{flex:1 1 0}
+.hmb .kinds{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.hmb .kr{display:flex;align-items:center;gap:10px;min-height:36px;padding:4px 10px;border:1px solid var(--field-line);border-radius:10px;background:var(--field);font-size:12.5px}
+.hmb .pill{flex:0 0 56px;height:22px;display:inline-flex;align-items:center;justify-content:center;border-radius:20px;color:#fff;font-size:12px;font-weight:700}
+.hmb .pill.err{background:var(--err-ink)}
+.hmb .pill.warn{background:var(--warn-ink)}
+.hmb .pill.ok{background:var(--ok-ink)}
+.hmb code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;background:var(--field);border:1px solid var(--field-line);border-radius:4px;padding:0 4px}
+.hmb pre{margin:8px 0 0;padding:10px 12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.55;background:var(--field);border:1px solid var(--field-line);border-radius:10px;color:var(--ink-default);white-space:pre-wrap}
+.hmb div.warn{background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;padding:10px 12px;margin-top:14px;font-size:12.5px}
+.hmb .fbtn{height:36px;padding:0 14px;font-size:13px;font-weight:500;margin:4px 0 8px}
+.hmb .fmsg{margin:0 0 6px;font-size:12px;color:var(--ink-note)}
+.hmb .fmsg.err{color:var(--err-ink)}
+/* 예시 이미지(목업) */
+.xm{background:#F5F5F6;padding:14px;position:relative;font-size:11px;line-height:1.4;color:var(--ink-default)}
+.xm.wide{background:var(--field);padding:12px}
+.xp{background:#fff;border:1px solid var(--accent-line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.xph{display:flex;align-items:center;gap:6px;color:var(--ink-strong);font-size:12px;font-weight:600;min-height:24px}
+.xph svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.xrow{display:flex;gap:8px}
+.xrow>*{flex:1 1 0;min-width:0}
+.xl{font-size:10px;color:var(--ink-note);font-weight:500;margin-bottom:2px}
+.xin{height:26px;display:flex;align-items:center;padding:0 8px;background:#F6F6F7;border:1px solid #E9E9EE;border-radius:8px;color:var(--ink-strong);font-size:11px}
+.xnote{font-size:10px;font-weight:600;color:var(--ink-strong)}
+.xchk{display:flex;align-items:center;gap:6px;justify-content:flex-end;font-size:11px;color:var(--ink-strong)}
+.xchk i.cb{width:14px;height:14px;border-radius:4px;background:var(--accent);display:inline-block;position:relative}
+.xchk i.cb:after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.xh{position:relative;outline:1.5px solid #1F6FEB;outline-offset:1px;border-radius:6px}
+.xrow>.xh{padding:3px 4px}
+.xrow{gap:10px;padding-top:4px}
+.xb{position:absolute;top:-9px;left:-9px;width:16px;height:16px;border-radius:50%;background:#1F6FEB;color:#fff;font-size:10px;font-weight:700;font-style:normal;display:grid;place-items:center;line-height:1;z-index:2}
+.xbtn{display:inline-flex;align-items:center;border:1px solid var(--field-line);border-radius:99px;padding:2px 10px;font-size:10px;color:var(--ink-strong);background:#fff;white-space:nowrap}
+.xchip{display:inline-flex;align-items:center;font-size:10px;padding:1px 8px;border-radius:99px;background:var(--warn-bg);color:var(--warn-ink);font-weight:500;white-space:nowrap}
+.xchip.ok{background:var(--ok-bg);color:var(--ok-ink);font-weight:600}
+.xchip.err{background:var(--err-bg);color:var(--err-ink);font-weight:600}
+.xci{border-radius:8px;padding:5px 8px;font-size:10px;background:var(--warn-bg);color:var(--warn-ink)}
+.xci.err{background:var(--err-bg);color:var(--err-ink)}
+.xtop{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--field-line);border-radius:8px;padding:6px 8px}
+.xtop .xbtn{background:#F6F6F7}
+.xtop .xbtn.p{background:var(--accent);border-color:transparent;color:#fff}
+.xsp{flex:1}
+.xbody{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:10px}
+.xpv{background:#fff;border:1px solid var(--field-line);border-radius:8px;padding:8px 10px;min-height:150px;position:relative}
+.xpv .ximg{margin-top:6px;height:110px;border-radius:4px;background:linear-gradient(#bfe3f8,#e9fbff)}
+.xzoom{position:absolute;top:8px;right:8px;width:26px;border:1px solid var(--field-line);border-radius:99px;background:#fff;text-align:center;padding:4px 0;font-size:10px;line-height:1.6}
+@media (max-width:760px){.hmb .two{flex-direction:column}.hmb .two .shot{width:100%;flex:none}}
 
 @media (max-width:859px){
   html,body{height:auto}
@@ -173,7 +203,6 @@ canvas{display:block;height:auto;background:#fff;box-shadow:0 1px 8px rgba(30,32
 
   <div class="main">
     <aside class="left">
-      <div class="lefttop"><button class="linkbtn" id="toggleAll" type="button">모든 패널 닫기</button></div>
 
       <section class="panel" id="p-ev">
         <div class="ph"><button class="phead" type="button" aria-expanded="true"><svg class="i chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg><svg class="i pic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>연도 / 월</button></div>
@@ -233,79 +262,120 @@ canvas{display:block;height:auto;background:#fff;box-shadow:0 1px 8px rgba(30,32
 
 <div class="overlay" id="help">
   <div class="hmodal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
-    <div class="hhead"><h2 id="helpTitle">사용법</h2><button class="iconbtn" id="helpClose" type="button" aria-label="닫기"><svg class="lc" width="20" height="20" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="hmh"><b id="helpTitle">사용법</b><button class="iconbtn" id="helpClose" type="button" aria-label="닫기"><svg class="lc" width="18" height="18" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="hmb">
 
-    <section class="hsec">
       <h3>전체 작업 흐름</h3>
-      <div class="hflow">
+      <div class="flow">
         <div><b>1. 불러오기</b>엑셀 명단 파일, 또는 json 작업파일</div>
         <div><b>2. 확인·수정</b>미리보기 보며 연도·월·적립일 수정</div>
         <div><b>3. 점검</b>좌측 하단 ‘점검하기’ 버튼으로 확인</div>
         <div><b>4. 내보내기</b>zip 저장(이미지+json)</div>
       </div>
-    </section>
 
-    <section class="hsec">
       <h3>화면 구성</h3>
-      <div class="hmock" aria-hidden="true">
-        <div class="mtop"><span class="mpill">엑셀 파일 불러오기<span class="hn">1</span></span><span class="mpill">작업파일(json) 불러오기<span class="hn">2</span></span><span class="msp"></span><span class="mpill">사용법<span class="hn">4</span></span><span class="mpill p">이미지 내보내기 (zip)<span class="hn">3</span></span></div>
-        <div class="mbody">
-          <div class="mleft">
-            <div class="mall">모든 패널 닫기<span class="hn">5</span></div>
-            <div class="mp">연도 / 월<span class="hn">6</span></div>
-            <div class="mp">적립일</div>
-            <div class="mp">점검</div>
+      <div class="shot xm wide" aria-hidden="true">
+        <div class="xtop"><span class="xh xbtn"><i class="xb">1</i>엑셀 파일 불러오기</span><span class="xh xbtn" style="margin-left:6px"><i class="xb">2</i>작업파일(json) 불러오기</span><span class="xsp"></span><span class="xbtn" style="background:#fff">사용법</span><span class="xh xbtn p" style="margin-left:6px"><i class="xb">3</i>이미지 내보내기 (zip)</span></div>
+        <div class="xbody">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div class="xh"><i class="xb">4</i><div class="xp"><div class="xph"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>연도 / 월</div></div></div>
+            <div class="xp"><div class="xph"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>적립일</div></div>
+            <div class="xp"><div class="xph"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>점검</div></div>
           </div>
-          <div class="mright"><b style="color:var(--ink-strong)">미리보기</b> 실제 저장 크기 1280 × 3900px<span class="hn" style="top:-6px;left:-6px;right:auto">7</span><div class="mimg"></div><div class="mzoom">+<br>75%<br>−<span class="hn">8</span></div></div>
+          <div class="xpv xh"><i class="xb">5</i><b style="color:var(--ink-strong)">미리보기</b> <span style="color:var(--ink-note)">실제 저장 크기 1280 × 3900px</span><div class="ximg"></div><div class="xzoom xh"><i class="xb">6</i>+<br>75%<br>−</div></div>
         </div>
       </div>
-      <ul class="hl">
-        <li><span class="hn">1</span><span><b>엑셀 파일 불러오기</b> : .xlsx / .xls / .csv 선택 → ‘이름’·‘아이디’ 열을 읽어 당첨자 명단 자동 입력 (최대 500명)</span></li>
-        <li><span class="hn">2</span><span><b>작업파일(json) 불러오기</b> : 이전에 내보낸 json을 불러와 이어서 수정</span></li>
-        <li><span class="hn">3</span><span><b>이미지 내보내기 (zip)</b> : 완성 이미지 + 작업파일(json) 저장</span></li>
-        <li><span class="hn">4</span><span><b>사용법</b> : 지금 보고 있는 안내</span></li>
-        <li><span class="hn">5</span><span><b>모든 패널 열기/닫기</b> : 좌측 입력 패널을 한 번에 펼치거나 접기</span></li>
-        <li><span class="hn">6</span><span><b>좌측 입력 패널</b> : 연도 / 월 · 적립일 · 점검</span></li>
-        <li><span class="hn">7</span><span><b>미리보기</b> : 입력하면 바로 반영, 왼쪽 위에 실제 저장 크기(가로 × 세로) 표시</span></li>
-        <li><span class="hn">8</span><span><b>확대 / 축소</b> : + / − 로 미리보기 크기 조절 (5% 단위, % 숫자를 더블클릭하면 화면 너비에 맞춤)</span></li>
-      </ul>
-    </section>
+      <ol class="lg">
+        <li><i>1</i><span><b>엑셀 파일 불러오기</b> : .xlsx / .xls / .csv 선택 → ‘이름’·‘아이디’ 열을 읽어 당첨자 명단 자동 입력 (최대 500명)</span></li>
+        <li><i>2</i><span><b>작업파일(json) 불러오기</b> : 이전에 내보낸 json을 불러와 이어서 수정</span></li>
+        <li><i>3</i><span><b>이미지 내보내기 (zip)</b> : 완성 이미지 + 작업파일(json) 저장</span></li>
+        <li><i>4</i><span><b>좌측 입력 패널</b> : 연도 / 월 · 적립일 · 점검</span></li>
+        <li><i>5</i><span><b>미리보기</b> : 입력하면 바로 반영, 왼쪽 위에 실제 저장 크기(가로 × 세로) 표시</span></li>
+        <li><i>6</i><span><b>확대 / 축소</b> : + / − 로 미리보기 크기 조절 (5% 단위, % 숫자를 더블클릭하면 화면 너비에 맞춤)</span></li>
+      </ol>
 
-    <section class="hsec">
-      <h3>엑셀 명단 양식</h3>
-      <ul class="hl">
-        <li><span class="hn">1</span><span>첫 시트의 위쪽 10행 안에 <b>‘이름’</b>, <b>‘아이디’</b> 제목 행이 있어야 하며, 그 아래 행부터 명단으로 읽습니다.</span></li>
-        <li><span class="hn">2</span><span>명단은 500명까지 표시됩니다. (100명씩 5열) 500명이 아니어도 하단 이미지의 “500명” 표기는 그대로입니다.</span></li>
-      </ul>
-    </section>
+      <h3>연도 / 월</h3>
+      <div class="two">
+        <div class="shot xm" aria-hidden="true">
+          <div class="xp">
+            <div class="xph"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>연도 / 월</div>
+            <div class="xrow">
+              <div class="xh"><i class="xb">1</i><div class="xl">연도</div><div class="xin">2026</div></div>
+              <div class="xh"><i class="xb">2</i><div class="xl">상단 제목 월</div><div class="xin">10</div></div>
+            </div>
+            <div class="xh" style="padding:2px 4px"><i class="xb">3</i><span class="xnote">10월 특별 콘 이벤트 당첨자 발표</span></div>
+          </div>
+        </div>
+        <ol class="lg">
+          <li><i>1</i><span><b>연도</b> : 저장 파일명의 연도(YY)에 사용 · 요일 자동 계산의 기준 연도</span></li>
+          <li><i>2</i><span><b>상단 제목 월</b> : 상단 제목 ‘○월 특별 콘 이벤트 당첨자 발표’에 표시 · 저장 폴더/파일명의 월(MM)에 사용</span></li>
+          <li><i>3</i><span><b>제목 미리 확인</b> : 입력한 월로 만들어진 상단 제목 문구</span></li>
+        </ol>
+      </div>
 
-    <section class="hsec">
-      <h3>연도 / 월 · 적립일</h3>
-      <ul class="hl">
-        <li><span class="hn">1</span><span><b>연도 / 상단 제목 월</b> : 상단 제목 ‘○월 특별 콘 이벤트 당첨자 발표’에 표시</span></li>
-        <li><span class="hn">2</span><span><b>적립일 월 / 일</b> : 하단 문구 ‘도전! 홈런출석왕 특별 콘은 ○월 ○일(요일)에 적립됩니다.’에 표시</span></li>
-        <li><span class="hn">3</span><span><b>요일 자동</b> : 체크하면 월/일에 맞는 요일을 달력 기준으로 자동 입력 (적립 월이 제목 월보다 작으면 다음 해로 계산). 요일을 직접 입력하면 자동이 해제됩니다.</span></li>
-      </ul>
-    </section>
+      <h3>적립일</h3>
+      <div class="two">
+        <div class="shot xm" aria-hidden="true">
+          <div class="xp">
+            <div class="xph"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>적립일</div>
+            <div class="xrow">
+              <div class="xh"><i class="xb">1</i><div class="xl">월</div><div class="xin">11</div></div>
+              <div class="xh"><i class="xb">1</i><div class="xl">일</div><div class="xin">8</div></div>
+              <div class="xh"><i class="xb">2</i><div class="xl">요일</div><div class="xin">일</div></div>
+            </div>
+            <div class="xchk"><span class="xh" style="display:inline-flex;gap:6px;align-items:center;padding:1px 4px"><i class="xb">3</i><i class="cb"></i>요일 자동</span></div>
+            <div class="xh" style="padding:2px 4px"><i class="xb">4</i><span class="xnote">도전! 홈런출석왕 특별 콘은 11월 8일(일)에 적립됩니다.</span></div>
+          </div>
+        </div>
+        <ol class="lg">
+          <li><i>1</i><span><b>월 / 일</b> : 하단 문구 ‘특별 콘은 ○월 ○일(요일)에 적립됩니다.’에 표시</span></li>
+          <li><i>2</i><span><b>요일</b> : 자동일 때는 달력 기준으로 입력되며, 직접 입력하면 ‘요일 자동’이 해제됨</span></li>
+          <li><i>3</i><span><b>요일 자동</b> : 체크하면 월/일에 맞는 요일을 자동 계산 (적립 월이 제목 월보다 작으면 다음 해 기준)</span></li>
+          <li><i>4</i><span><b>하단 문구 미리 확인</b> : 입력한 적립일로 만들어진 하단 문구</span></li>
+        </ol>
+      </div>
 
-    <section class="hsec">
       <h3>점검</h3>
-      <ul class="hl">
-        <li><span class="hn">1</span><span>‘점검하기’를 누르면 다음을 확인합니다 : 명단 미첨부 · 500명이 아닌 인원 · 이름/아이디 빈 값 · 연/월/일 범위 · 존재하지 않는 날짜 · 요일 불일치</span></li>
-        <li><span class="hn">2</span><span>‘수정 필요’ 항목이 있으면 고친 뒤 ‘다시 점검하기’로 확인하고, ‘이상 없음’이면 내보내기 하세요.</span></li>
-      </ul>
-    </section>
+      <div class="two">
+        <div class="shot xm" aria-hidden="true">
+          <div class="xp">
+            <div class="xph"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>점검 <span class="xchip err xh" style="margin-left:4px"><i class="xb">3</i>수정 필요 2</span><span class="xsp"></span><span class="xbtn xh"><i class="xb">1</i>다시 점검하기</span></div>
+            <div class="xh" style="display:flex;align-items:center;gap:6px;padding:2px 4px"><i class="xb">2</i><span class="xnote">당첨자 명단</span><span class="xchip ok">498명 적용됨</span></div>
+            <div class="xci">명단이 498명입니다. 하단 이미지의 “500명” 표기는 그대로 유지됩니다.</div>
+            <div class="xci err">입력한 요일(월)이 달력과 다릅니다.</div>
+          </div>
+        </div>
+        <ol class="lg">
+          <li><i>1</i><span><b>점검하기 / 다시 점검하기</b> : 명단과 적립일을 한 번에 확인 (이후 입력을 바꾸면 자동으로 다시 점검)</span></li>
+          <li><i>2</i><span><b>당첨자 명단</b> : 불러온 명단 상태 (미첨부 / N명 적용됨)</span></li>
+          <li><i>3</i><span><b>점검 결과</b> : ‘수정 필요 N’ 또는 ‘이상 없음’ 배지와 항목별 안내</span></li>
+        </ol>
+      </div>
+      <div class="kinds">
+        <div class="kr"><span class="pill err">오류</span>당첨자 명단 없음 · 연도/월/일 범위 오류 · 존재하지 않는 날짜 · 요일 비어 있음</div>
+        <div class="kr"><span class="pill warn">주의</span>500명이 아닌 인원 · 500명 초과 · 이름/아이디 빈 행 · 입력 요일과 달력 요일 불일치</div>
+        <div class="kr"><span class="pill ok">정상</span>이상 없음 → 이미지 내보내기</div>
+      </div>
 
-    <section class="hsec">
+      <h3>폰트 설치</h3>
+      <button class="b plain fbtn" id="fontDl" type="button"><svg class="lc" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>폰트 내려받기 (zip)</button>
+      <p class="fmsg" id="fontMsg" hidden></p>
+      <ul>
+        <li>필요 폰트 : Jalnan2(여기어때 잘난체) · Nanum Gothic(나눔고딕)</li>
+        <li>zip 압축 풀기 → 폰트 전체 선택 → 우클릭 [설치] (Mac은 더블클릭 → [서체 설치]) → 이 제작 도구 화면 새로고침(F5)</li>
+      </ul>
+      <div class="warn"><b>주의</b> : 폰트가 없어도 사용할 수 있지만, 설치를 권장합니다. (미설치 시 PC 환경에 따라 명단 글꼴이 달라질 수 있음)</div>
+
       <h3>내보내기 파일 구성</h3>
-      <pre class="hpre">[디자인팀]○월_출석왕당첨자/
+      <p>‘이미지 내보내기 (zip)’ 압축을 풀면 아래 구조로 저장됩니다.</p>
+      <pre>[디자인팀]○월_출석왕당첨자/
   img_re_check_YY_MM.jpg      ← 1장짜리 완성 이미지
   img_re_check_YY_MM.json     ← 작업파일 (이어서 수정할 때 불러오기)
   images/
     img_re_check_YY_MM_01.jpg   ← 상단
     img_re_check_YY_MM_02.jpg   ← 명단
     img_re_check_YY_MM_03.jpg   ← 하단</pre>
-    </section>
+    </div>
   </div>
 </div>
 
@@ -587,15 +657,7 @@ canvas{display:block;height:auto;background:#fff;box-shadow:0 1px 8px rgba(30,32
   /* 패널 접기/펼치기 */
   function setPanel(p,open){p.classList.toggle('closed',!open);p.querySelector('.phead').setAttribute('aria-expanded',open?'true':'false')}
   Array.prototype.forEach.call(document.querySelectorAll('.panel'),function(p){
-    p.querySelector('.phead').addEventListener('click',function(){setPanel(p,p.classList.contains('closed'));syncToggleAll()});
-  });
-  function syncToggleAll(){
-    var ps=document.querySelectorAll('.panel'),anyOpen=Array.prototype.some.call(ps,function(p){return !p.classList.contains('closed')});
-    $('toggleAll').textContent=anyOpen?'모든 패널 닫기':'모든 패널 열기';
-  }
-  $('toggleAll').addEventListener('click',function(){
-    var ps=document.querySelectorAll('.panel'),anyOpen=Array.prototype.some.call(ps,function(p){return !p.classList.contains('closed')});
-    Array.prototype.forEach.call(ps,function(p){setPanel(p,!anyOpen)});syncToggleAll();
+    p.querySelector('.phead').addEventListener('click',function(){setPanel(p,p.classList.contains('closed'))});
   });
 
   /* 미리보기 크기 조절: 100% = 미리보기 영역 가로에 맞춤, 5% 단위, 영역 가운데 정렬 */
@@ -621,6 +683,67 @@ canvas{display:block;height:auto;background:#fff;box-shadow:0 1px 8px rgba(30,32
   $('zOut').addEventListener('click',function(){if(zp>ZMIN){zp=Math.max(ZMIN,zp-ZSTEP);applyZoom(true)}});
   window.addEventListener('resize',function(){applyZoom(true)});
   $('zVal').addEventListener('dblclick',function(){zp=100;applyZoom(true)});
+
+  /* 폰트 내려받기: 서버에 폰트 파일을 올리지 않고 브라우저에서 zip 생성
+     - 잘난체(Jalnan2): 이 페이지에 내장된 폰트 데이터를 그대로 꺼내 담음
+     - 나눔고딕: 공개 폰트 저장소(CDN)에서 클릭 시점에 받아 담음 (실패해도 잘난체 zip은 저장) */
+  function fmsg(t,err){var m=$('fontMsg');m.hidden=false;m.className='fmsg'+(err?' err':'');m.textContent=t}
+  function jalnanB64(){
+    var st=document.querySelectorAll('style');
+    for(var i=0;i<st.length;i++){
+      var t=st[i].textContent, k=t.indexOf('Jalnan2');
+      if(k<0)continue;
+      var a=t.indexOf('base64,',k); if(a<0)continue;
+      var b=t.indexOf(')',a); if(b<0)continue;
+      return t.slice(a+7,b).replace(/["'\s]/g,'');
+    }
+    return '';
+  }
+  var NANUM_URLS=[
+    'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/nanumgothic/NanumGothic-Regular.ttf',
+    'https://raw.githubusercontent.com/google/fonts/main/ofl/nanumgothic/NanumGothic-Regular.ttf'
+  ];
+  function fetchFont(i){
+    if(i>=NANUM_URLS.length)return Promise.reject(new Error('fetch fail'));
+    var ctl=window.AbortController?new AbortController():null, to=setTimeout(function(){ctl&&ctl.abort()},20000);
+    return fetch(NANUM_URLS[i],ctl?{signal:ctl.signal}:{}).then(function(r){
+      clearTimeout(to);if(!r.ok)throw new Error('http '+r.status);return r.arrayBuffer();
+    }).then(function(ab){
+      var h=new Uint8Array(ab.slice(0,4)), ok=ab.byteLength>100000&&((h[0]===0&&h[1]===1&&h[2]===0&&h[3]===0)||(h[0]===0x74&&h[1]===0x72)||(h[0]===0x4F&&h[1]===0x54));
+      if(!ok)throw new Error('bad font');return ab;
+    }).catch(function(){clearTimeout(to);return fetchFont(i+1)});
+  }
+  function saveBlob(blob,fn){
+    var use=(window.claude&&window.claude.use)?window.claude.use('downloads'):Promise.resolve(null);
+    return use.then(function(d){
+      if(d&&d.save){
+        return d.save({filename:fn,data:blob}).catch(function(){return blob.arrayBuffer().then(function(ab){return d.save({filename:fn,data:new Uint8Array(ab)})})});
+      }
+      var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();a.remove();
+      setTimeout(function(){URL.revokeObjectURL(a.href)},1500);
+    });
+  }
+  $('fontDl').addEventListener('click',function(){
+    var btn=this, b64=jalnanB64();
+    if(!window.JSZip){fmsg('압축 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인하세요.',true);return}
+    if(!b64){fmsg('내장 폰트를 찾지 못했습니다.',true);return}
+    btn.disabled=true;fmsg('폰트를 준비하는 중입니다…');
+    var z=new JSZip(), folder='출석왕_폰트';
+    z.file(folder+'/Jalnan2.ttf',b64,{base64:true});
+    var readme='[출석왕 당첨자 발표 제작 도구] 폰트 설치 방법\r\n\r\n'+
+      '1) 이 zip의 압축을 풉니다.\r\n2) 폰트 파일을 모두 선택합니다.\r\n3) Windows: 우클릭 → [설치] / Mac: 더블클릭 → [서체 설치]\r\n4) 제작 도구 화면을 새로고침(F5)합니다.\r\n\r\n'+
+      '- Jalnan2.ttf : 여기어때 잘난체 (상단 제목, 하단 적립일 문구)\r\n- NanumGothic-Regular.ttf : 나눔고딕 (당첨자 명단)\r\n\r\n'+
+      '폰트가 없어도 사용할 수 있지만, 설치를 권장합니다.\r\n';
+    fetchFont(0).then(function(ab){z.file(folder+'/NanumGothic-Regular.ttf',ab);return true},function(){return false}).then(function(gotNanum){
+      if(!gotNanum)readme+='\r\n※ 나눔고딕을 자동으로 받지 못했습니다. 아래 주소에서 내려받아 함께 설치하세요.\r\nhttps://fonts.google.com/specimen/Nanum+Gothic\r\n';
+      z.file(folder+'/설치방법.txt',readme);
+      return z.generateAsync({type:'blob',compression:'DEFLATE'}).then(function(blob){
+        return saveBlob(blob,folder+'.zip').then(function(){
+          fmsg(gotNanum?'폰트 zip을 저장했습니다. (잘난체 + 나눔고딕)':'잘난체만 담아 저장했습니다. 나눔고딕은 받지 못해 zip 안 설치방법.txt의 주소에서 내려받으세요.',!gotNanum);
+        });
+      });
+    }).catch(function(e){fmsg('폰트 zip을 만들지 못했습니다. '+(e&&(e.message||e.code)||''),true)}).then(function(){btn.disabled=false});
+  });
 
   /* 사용법 */
   var hov=$('help'), hLast=null;
